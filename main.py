@@ -45,20 +45,20 @@ def getIndex(x, y):
 board = [-1] * 9  # initialising the board with -1, which means no moves
 
 # dictionary of index and render coordinate
-coord = {0: (75, 125),
-         1: (225, 125),
-         2: (375, 125),
-         3: (75, 275),
-         4: (225, 275),
-         5: (375, 275),
-         6: (75, 425),
-         7: (225, 425),
-         8: (375, 425)}
+coord = {0: (50, 100),
+         1: (200, 100),
+         2: (350, 100),
+         3: (50, 250),
+         4: (200, 250),
+         5: (325, 250),
+         6: (50, 400),
+         7: (200, 400),
+         8: (325, 400)}
 
 
 # function to display cross and circle according to click coordinates and chance
 def display_sign(ind, sign):
-    if index != -1:
+    if ind != -1:
         if sign == 0:
             screen.blit(circle, coord[ind])
         if sign == 1:
@@ -68,9 +68,16 @@ def display_sign(ind, sign):
 running = True
 who = 0 # check if player will draw cross or circle
 
+def display_board():
+    for val in range(9):
+        if board[val] == 1:
+            display_sign(val, 1)
+        elif board[val] == 0:
+            display_sign(val, 0)
+
 while running:
     screen.fill((255, 253, 208))
-
+    display_board()
     pygame.draw.line(screen, (255, 255, 255), (0, 50), (500, 50))
     pygame.draw.line(screen, (0, 0, 0), (0, 200), (500, 200))
     pygame.draw.line(screen, (0, 0, 0), (0, 350), (500, 350))
@@ -89,6 +96,10 @@ while running:
             click_x = click_coord[0]
             click_y = click_coord[1]
             index = getIndex(click_x, click_y)
-            display_sign(index, who)
-    pygame.display.flip()
+            board[index]=who
+            if who == 0: 
+                who = 1
+            else:
+                who = 0
+    # pygame.display.flip()
     pygame.display.update()
