@@ -50,10 +50,10 @@ coord = {0: (50, 100),
          2: (350, 100),
          3: (50, 250),
          4: (200, 250),
-         5: (325, 250),
+         5: (350, 250),
          6: (50, 400),
          7: (200, 400),
-         8: (325, 400)}
+         8: (350, 400)}
 
 
 # function to display cross and circle according to click coordinates and chance
