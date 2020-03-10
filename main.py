@@ -1,7 +1,9 @@
 import pygame
 
 pygame.init()
-screen = pygame.display.set_mode((450, 500))
+HEIGHT = 500
+WIDTH = 450
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 font = pygame.font.Font('CaviarDreams.ttf', 32)
 pygame.display.set_caption('TicTacToe')
 cross = pygame.image.load('img/cross.png')
@@ -77,7 +79,7 @@ while running:
     pygame.draw.line(screen, (0, 0, 0), (150, 50), (150, 500))
     pygame.draw.line(screen, (0, 0, 0), (300, 50), (300, 500))
     pygame.draw.line(screen, (0, 0, 0), (450, 50), (450, 500))
-    # pygame.display.flip()
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -88,5 +90,5 @@ while running:
             click_y = click_coord[1]
             index = getIndex(click_x, click_y)
             display_sign(index, who)
-
+    pygame.display.flip()
     pygame.display.update()
