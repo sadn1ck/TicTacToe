@@ -167,6 +167,13 @@ def PvC():
                     board[index]=who
                     moves += 1
                     who = update_who(who)
+                if(check_game_over(moves)):
+                        # print("Player 2 Wins!")
+                        moves=9
+                        screen.blit(p1Win, p1WinRect)
+                        pygame.display.flip()
+                        pygame.display.update
+                        time.sleep(2)
                 
                 if(moves<9):
                     new_index = compMove(moves, board)
