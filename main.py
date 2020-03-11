@@ -1,4 +1,6 @@
 import pygame
+import sys
+import time
 
 pygame.init()
 HEIGHT = 500
@@ -45,16 +47,15 @@ def getIndex(x, y):
 board = [-1] * 9  # initialising the board with -1, which means no moves
 
 # dictionary of index and render coordinate
-coord = {0: (50, 100),
-         1: (200, 100),
-         2: (350, 100),
-         3: (50, 250),
-         4: (200, 250),
-         5: (350, 250),
-         6: (50, 400),
-         7: (200, 400),
-         8: (350, 400)}
-
+coord ={0: (50, 100),
+        1: (200, 100),
+        2: (350, 100),
+        3: (50, 250),
+        4: (200, 250),
+        5: (350, 250),
+        6: (50, 400),
+        7: (200, 400),
+        8: (350, 400)}
 
 # function to display cross and circle according to click coordinates and chance
 def display_sign(ind, sign):
@@ -66,7 +67,8 @@ def display_sign(ind, sign):
 
 
 running = True
-who = 0 # check if player will draw cross or circle
+who = 1 # check if player will draw cross or circle
+moves = 0 #total number of moves so far
 
 def display_board():
     for val in range(9):
@@ -75,9 +77,45 @@ def display_board():
         elif board[val] == 0:
             display_sign(val, 0)
 
+def check_game_over(moves):
+    if moves < 5:
+        return False
+    elif board[0]==board[1]==board[2] and board[0]!=-1:
+        return True 
+    elif board[3]==board[4]==board[5] and board[3]!=-1:
+        return True
+    elif board[6]==board[7]==board[8] and board[6]!=-1:
+        return True
+    elif board[0]==board[3]==board[6] and board[0]!=-1:
+        return True 
+    elif board[1]==board[4]==board[7] and board[1]!=-1:
+        return True
+    elif board[2]==board[5]==board[8] and board[6]!=-1:
+        return True
+    elif board[0]==board[4]==board[8] and board[0]!=-1:
+        return True 
+    elif board[2]==board[4]==board[6] and board[2]!=-1:
+        return True
+    else:
+        return False
+
 while running:
     screen.fill((255, 253, 208))
-    display_board()
+    if(moves == 9):
+        print("Draw!")
+        running = False
+        pygame.quit()
+        sys.exit()
+        quit()
+    if(check_game_over(moves)):
+        if who == 0:
+            print("Player 2 Wins!")
+        else:
+            print("Player 1 Wins!")
+        running = False
+        pygame.quit()
+        sys.exit()
+        quit()
     pygame.draw.line(screen, (255, 255, 255), (0, 50), (500, 50))
     pygame.draw.line(screen, (0, 0, 0), (0, 200), (500, 200))
     pygame.draw.line(screen, (0, 0, 0), (0, 350), (500, 350))
@@ -96,10 +134,13 @@ while running:
             click_x = click_coord[0]
             click_y = click_coord[1]
             index = getIndex(click_x, click_y)
-            board[index]=who
-            if who == 0: 
-                who = 1
-            else:
-                who = 0
-    # pygame.display.flip()
+            if(board[index]==-1):               
+                board[index]=who
+                moves += 1
+                if who == 0: 
+                    who = 1
+                else:
+                    who = 0
+    display_board()
+    pygame.display.flip()
     pygame.display.update()
