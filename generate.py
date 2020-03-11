@@ -66,14 +66,16 @@ def compMove(moves, board):
         if val != -1:
             if(board[val] == -1):
                 return val
-        if checkFree(1, 7, board):
-            return 7
-        elif checkFree(3, 5, board):
-            return 3
-        else:
-            for ind in range(9):
-                if(board[ind]==-1):
-                    return ind
+        if board[4]==0 :
+            if checkFree(1, 7, board):
+                return 7
+            elif checkFree(3, 5, board):
+                return 3
+        if board[4]==1:
+            return 6
+        for ind in range(9):
+            if(board[ind]==-1):
+                return ind
     elif moves >= 5:
         val = checkBetween(0, board)
         if val != -1:
