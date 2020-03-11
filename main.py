@@ -128,19 +128,19 @@ def PvP():
             pygame.display.flip()
             pygame.display.update
             time.sleep(2)
-            print("Draw!")
+            # print("Draw!")
             running = False
             return
         if(check_game_over(moves)):
             if who == 0:
-                print("Player 2 Wins!")
+                # print("Player 2 Wins!")
                 moves=9
                 screen.blit(p1Win, p1WinRect)
                 pygame.display.flip()
                 pygame.display.update
                 time.sleep(2)
             else:
-                print("Player 1 Wins!")
+                # print("Player 1 Wins!")
                 moves=9
                 screen.blit(p2Win, p2WinRect)
                 pygame.display.flip()
