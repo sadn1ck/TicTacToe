@@ -67,7 +67,11 @@ def compMove(moves, board):
             if(board[val] == -1):
                 return val
         if board[4]==0 :
-            if checkFree(1, 7, board):
+            if checkFree(0, 8, board):
+                return 0
+            elif checkFree(2, 6, board):
+                return 2
+            elif checkFree(1, 7, board):
                 return 7
             elif checkFree(3, 5, board):
                 return 3
