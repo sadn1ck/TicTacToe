@@ -86,3 +86,5 @@ def compMove(moves, board):
         for ind in range(9):
             if(board[ind]==-1):
                 return ind
+
+

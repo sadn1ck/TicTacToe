@@ -7,6 +7,23 @@ def PvP():
     WIDTH = 450
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     font = pygame.font.Font('CaviarDreams.ttf', 32)
+    s1 = 'Player1\'s Move'
+    s2 = 'Player2\'s Move'
+    text1 = font.render(s1, True, (0, 0, 0)) 
+    text2 = font.render(s2, True, (0, 0, 0)) 
+    draw_text = font.render('Draw Match!', True, (0, 0, 0)) 
+    p1Win = font.render('Player1 Wins!', True, (0, 0, 0)) 
+    p2Win = font.render('Player1 Wins!', True, (0, 0, 0)) 
+    draw_textRect = draw_text.get_rect()
+    p1WinRect = p1Win.get_rect()
+    p2WinRect = p2Win.get_rect()
+    text1Rect = text1.get_rect() 
+    text2Rect = text2.get_rect()
+    text1Rect.center = (WIDTH // 2, 25) 
+    text2Rect.center = (WIDTH // 2, 25)
+    draw_textRect.center = (WIDTH // 2, HEIGHT//2)
+    p1WinRect.center = (WIDTH // 2, HEIGHT//2)
+    p2WinRect.center = (WIDTH // 2, HEIGHT//2)   
     pygame.display.set_caption('TicTacToe')
     cross = pygame.image.load('img/cross.png')
     circle = pygame.image.load('img/circle.png')
@@ -70,7 +87,11 @@ def PvP():
     who = 1 # check if player will draw cross or circle
     moves = 0 #total number of moves so far
 
-    def display_board():
+    def display_board(moves):
+        if moves<9 and moves%2 == 0:
+            screen.blit(text1, text1Rect)
+        elif moves<9:
+            screen.blit(text2, text2Rect)
         for val in range(9):
             if board[val] == 1:
                 display_sign(val, 1)
@@ -102,16 +123,31 @@ def PvP():
     while running:
         screen.fill((255, 253, 208))
         if(moves == 9):
+            # display_board(moves)
+            screen.blit(draw_text, draw_textRect)
+            pygame.display.flip()
+            pygame.display.update
+            time.sleep(2)
             print("Draw!")
             running = False
-            pygame.quit()
+            return
         if(check_game_over(moves)):
             if who == 0:
                 print("Player 2 Wins!")
+                moves=9
+                screen.blit(p1Win, p1WinRect)
+                pygame.display.flip()
+                pygame.display.update
+                time.sleep(2)
             else:
                 print("Player 1 Wins!")
+                moves=9
+                screen.blit(p2Win, p2WinRect)
+                pygame.display.flip()
+                pygame.display.update
+                time.sleep(2)
             running = False
-            pygame.quit()
+            return
         pygame.draw.line(screen, (255, 255, 255), (0, 50), (500, 50))
         pygame.draw.line(screen, (0, 0, 0), (0, 200), (500, 200))
         pygame.draw.line(screen, (0, 0, 0), (0, 350), (500, 350))
@@ -123,7 +159,7 @@ def PvP():
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                return
             if event.type == pygame.MOUSEBUTTONUP:  # or MOUSEBUTTONDOWN depending on what you want.
                 click_coord = event.pos
                 click_x = click_coord[0]
@@ -136,20 +172,6 @@ def PvP():
                         who = 1
                     else:
                         who = 0
-        display_board()
+        display_board(moves)
         pygame.display.flip()
         pygame.display.update()
-
-
-
-
-
-
-
-
-
-
-
-
-# print('hello')
-# PvP()
