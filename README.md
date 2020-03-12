@@ -4,9 +4,9 @@ Simple TicTacToe game created by me and [Arnab Sen](http://github.com/mr-daredev
 ## Requirements
 * Python 3.5+
 * PyGame
-  * to install, first install Python3 and then type 
-    * `pip install pygame` (for Windows) OR 
-    * `pip3 install pygame` (for Linux try both)
+
+To install any and all future dependencies, just do
+ * `pip3 install -r requirements.txt`
  
 ## Running
  
