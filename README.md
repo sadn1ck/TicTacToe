@@ -1,5 +1,5 @@
 # TicTacToe
-Simple TicTacToe game created by me and [Arnab Sen](http://github.com/mr-daredevil) using the PyGame library.
+Simple TicTacToe game created by me and [Arnab Sen](https://github.com/arnabsen1729) using the PyGame library.
 
 ## Requirements
 * Python 3.5+
